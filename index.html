@@ -77,6 +77,26 @@ footer{margin-top:48px;font-size:13px;color:var(--muted)}
 .count{font-family:var(--mono);font-size:13px;color:var(--muted)}
 
 .show{background:var(--surface)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:2px solid var(--line)}
+.tabs button{font:inherit;font-weight:600;font-size:15px;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;padding:10px 16px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red)}
+.tabs button:focus-visible,.notes-form button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.notes-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:24px;padding-top:18px}
+@media (max-width:800px){.notes-panel{grid-template-columns:1fr}}
+.note{border-bottom:1px solid var(--line);padding:12px 0}
+.note p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.note .when{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;gap:12px;align-items:center;margin-bottom:4px}
+.note .del{font:inherit;font-size:12px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0}
+.empty{color:var(--muted);padding:12px 0}
+.notes-form{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:10px;align-self:start}
+.notes-form label{font-size:13px;font-weight:600}
+.notes-form textarea,.notes-form input{font:inherit;width:100%;border:1px solid var(--line);border-radius:4px;padding:8px 10px;background:var(--bg);color:var(--ink)}
+.notes-form textarea{min-height:140px;resize:vertical}
+.notes-form button{font:inherit;font-weight:600;background:var(--red);color:#fff;border:0;border-radius:4px;padding:10px 14px;cursor:pointer}
+.notes-form button:disabled{opacity:.6;cursor:default}
+.status{font-size:13px;min-height:1.2em;color:var(--muted)}
+.status.err{color:var(--red)}
 </style>
 </head>
 <body>
@@ -134,6 +154,26 @@ footer{margin-top:48px;font-size:13px;color:var(--muted)}
   </div>
   <div class="count" id="count"></div>
   <div id="cal"></div>
+</section>
+
+<section id="poznamky">
+  <div class="sechead"><h2>Poznámky týmu</h2></div>
+  <div class="tabs" role="tablist" aria-label="Poznámky">
+    <button role="tab" id="tab-irca" data-p="irca" aria-selected="true">Poznámky IRČA</button>
+    <button role="tab" id="tab-patrik" data-p="patrik" aria-selected="false">Poznámky Patrik</button>
+    <button role="tab" id="tab-filip" data-p="filip" aria-selected="false">Poznámky Filip</button>
+  </div>
+  <div class="notes-panel" role="tabpanel">
+    <div id="notes-list" aria-live="polite"><div class="empty">Načítám poznámky…</div></div>
+    <form class="notes-form" id="notes-form">
+      <label for="note-text" id="note-label">Nová poznámka</label>
+      <textarea id="note-text" maxlength="2000" placeholder="Napiš poznámku k sériím, dílům nebo plánu…"></textarea>
+      <label for="note-pin">Tvůj PIN</label>
+      <input id="note-pin" type="password" inputmode="numeric" autocomplete="current-password">
+      <button type="submit" id="note-save">Uložit poznámku</button>
+      <div class="status" id="note-status"></div>
+    </form>
+  </div>
 </section>
 
 <section>
@@ -270,6 +310,61 @@ function setF(f){
 }
 document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>setF(b.dataset.f)));
 setF(["all","a","p","z"].includes(saved)?saved:"all");
+
+const PEOPLE={irca:"IRČA",patrik:"Patrik",filip:"Filip"};
+let person="irca";
+const nList=document.getElementById("notes-list"),nForm=document.getElementById("notes-form"),nText=document.getElementById("note-text"),nPin=document.getElementById("note-pin"),nSave=document.getElementById("note-save"),nStatus=document.getElementById("note-status");
+function status(msg,err){nStatus.textContent=msg||"";nStatus.className="status"+(err?" err":"")}
+function fmt(iso){const d=new Date(iso);return d.toLocaleDateString("cs-CZ")+" "+d.toLocaleTimeString("cs-CZ",{hour:"2-digit",minute:"2-digit"})}
+function loadPin(){try{nPin.value=localStorage.getItem("mavo-pin-"+person)||""}catch(e){nPin.value=""}}
+function savePin(){try{localStorage.setItem("mavo-pin-"+person,nPin.value)}catch(e){}}
+async function api(method,body){
+  const opt={method,headers:{"Content-Type":"application/json"}};
+  let url="/api/notes";
+  if(method==="GET")url+="?person="+person;else opt.body=JSON.stringify(Object.assign({person},body));
+  let r;try{r=await fetch(url,opt)}catch(e){throw new Error("Poznámky teď nejdou načíst. Zkontroluj připojení.")}let data={};try{data=await r.json()}catch(e){}
+  if(!r.ok)throw new Error(data.error||"Poznámky se nepodařilo načíst.");
+  return data;
+}
+async function loadNotes(){
+  const p=person;
+  nList.innerHTML='<div class="empty">Načítám poznámky…</div>';
+  try{
+    const {notes}=await api("GET");if(p!==person)return;
+    if(!notes.length){nList.innerHTML='<div class="empty">'+PEOPLE[p]+' zatím nic nenapsal(a). První poznámku přidáš ve formuláři.</div>';return}
+    nList.innerHTML="";
+    notes.forEach(n=>{
+      const el=document.createElement("div");el.className="note";
+      const w=document.createElement("div");w.className="when";w.textContent=fmt(n.at);
+      const del=document.createElement("button");del.type="button";del.className="del";del.textContent="Smazat";
+      del.addEventListener("click",async()=>{
+        if(!nPin.value){status("Pro smazání zadej PIN.",true);nPin.focus();return}
+        if(del.dataset.confirm!=="1"){del.dataset.confirm="1";del.textContent="Opravdu smazat?";return}
+        try{await api("DELETE",{id:n.id,pin:nPin.value});savePin();status("Smazáno.");loadNotes()}catch(e){status(e.message,true)}
+      });
+      w.appendChild(del);
+      const t=document.createElement("p");t.textContent=n.text;
+      el.append(w,t);nList.appendChild(el);
+    });
+  }catch(e){nList.innerHTML="";const d=document.createElement("div");d.className="empty";d.textContent=e.message;nList.appendChild(d)}
+}
+function setPerson(p){
+  person=p;
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.p===p)));
+  document.getElementById("note-label").textContent="Nová poznámka ("+PEOPLE[p]+")";
+  status("");loadPin();loadNotes();
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setPerson(b.dataset.p)));
+nForm.addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  if(!nText.value.trim()){status("Napiš text poznámky.",true);return}
+  if(!nPin.value){status("Zadej svůj PIN.",true);return}
+  nSave.disabled=true;status("Ukládám…");
+  try{await api("POST",{text:nText.value,pin:nPin.value});savePin();nText.value="";status("Uloženo, vidí to všichni.");loadNotes()}
+  catch(e){status(e.message,true)}
+  finally{nSave.disabled=false}
+});
+setPerson("irca");
 </script>
 </body>
 </html>
