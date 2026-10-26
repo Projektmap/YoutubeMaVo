@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="YouTube strategie Martina Vohralíka: 3 série a roční plán 78 dílů na rok 2027.">
+<title>YouTube MaVo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+html,body{margin:0}
+/* Layout: kanálová "plánovací tabule" – hlavička, 3 sloupce sérií, pod nimi filtrovatelný roční kalendář 78 dílů */
+:root{color-scheme:light;
+  --bg:#ffffff; --surface:#ffffff; --ink:#282828; --muted:#606060; --line:#e5e5e5;
+  --red:#ff0000; --orange:#282828; --blue:#606060; --chip:#f2f2f2;
+  --display:"Bebas Neue","Impact","Arial Narrow",sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f0f0f; --surface:#1a1a1a; --ink:#f1f1f1; --muted:#aaaaaa; --line:#303030;
+  --red:#ff0000; --orange:#f1f1f1; --blue:#aaaaaa; --chip:#272727; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f0f0f; --surface:#1a1a1a; --ink:#f1f1f1; --muted:#aaaaaa; --line:#303030;
+  --red:#ff0000; --orange:#f1f1f1; --blue:#aaaaaa; --chip:#272727; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.02em;line-height:1;text-wrap:balance;margin:0}
+a{color:inherit}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;border-bottom:3px solid var(--ink);padding-bottom:18px}
+.brand{display:flex;align-items:center;gap:14px}
+.mark{width:54px;height:54px;background:var(--red);border-radius:6px;display:grid;place-items:center;color:#fff;font-family:var(--display);font-size:26px;flex:none}
+h1{font-size:clamp(44px,8vw,76px)}
+h1 span{color:var(--red)}
+.handle{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.facts{display:flex;flex-wrap:wrap;gap:22px}
+.fact b{display:block;font-family:var(--display);font-size:34px;line-height:1;font-weight:400}
+.fact small{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.lead{max-width:68ch;font-size:17px;margin:22px 0 30px}
+.series{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.series{grid-template-columns:1fr}}
+.show{background:var(--surface);border:1px solid var(--line);border-top:6px solid var(--c);border-radius:4px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.show .tag{font-family:var(--mono);font-size:12px;color:var(--c);text-transform:uppercase;letter-spacing:.08em}
+.show h2{font-size:38px}
+.show p{margin:0}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:14px}
+.meta dt{color:var(--muted)}
+.meta dd{margin:0}
+.show ol{margin:0;padding-left:20px;font-size:14px}
+.show details summary{cursor:pointer;font-weight:600;font-size:14px}
+.a{--c:var(--red)} .p{--c:var(--orange)} .z{--c:var(--blue)}
+section{margin-top:48px}
+.sechead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:14px}
+.sechead h2{font-size:44px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 14px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button:focus-visible,.show summary:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.month{margin-top:22px}
+.month h3{font-size:26px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:4px;margin-bottom:6px}
+.ep{display:grid;grid-template-columns:70px 130px minmax(0,1fr);gap:12px;padding:10px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.ep .d{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.ep .s{font-size:12px;font-weight:600;color:var(--c);text-transform:uppercase;letter-spacing:.05em}
+.ep .t{font-weight:600}
+.ep .x{color:var(--muted);font-size:14px}
+.ep .n{font-family:var(--mono);font-size:12px;color:var(--muted);margin-right:6px}
+.ep.pilot .t::after{content:"Pilot hotový";margin-left:8px;font-size:11px;font-weight:600;background:var(--red);color:#fff;padding:2px 7px;border-radius:999px;vertical-align:2px}
+@media (max-width:600px){.ep{grid-template-columns:62px minmax(0,1fr)}.ep .s{grid-column:2}.ep .body{grid-column:2}}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px}
+.rule h3{font-size:24px;margin-bottom:6px}
+.rule p{margin:0;font-size:14px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.links a{font-size:14px;font-weight:600;text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:4px}
+.links a:hover{border-color:var(--red)}
+footer{margin-top:48px;font-size:13px;color:var(--muted)}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+.show{background:var(--surface)}
+
+.tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:2px solid var(--line)}
+.tabs button{font:inherit;font-weight:600;font-size:15px;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;padding:10px 16px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--red)}
+.tabs button:focus-visible,.notes-form button:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.notes-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:24px;padding-top:18px}
+@media (max-width:800px){.notes-panel{grid-template-columns:1fr}}
+.note{border-bottom:1px solid var(--line);padding:12px 0}
+.note p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.note .when{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;gap:12px;align-items:center;margin-bottom:4px}
+.note .del{font:inherit;font-size:12px;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0}
+.empty{color:var(--muted);padding:12px 0}
+.notes-form{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:10px;align-self:start}
+.notes-form label{font-size:13px;font-weight:600}
+.notes-form textarea,.notes-form input{font:inherit;width:100%;border:1px solid var(--line);border-radius:4px;padding:8px 10px;background:var(--bg);color:var(--ink)}
+.notes-form textarea{min-height:140px;resize:vertical}
+.notes-form button{font:inherit;font-weight:600;background:var(--red);color:#fff;border:0;border-radius:4px;padding:10px 14px;cursor:pointer}
+.notes-form button:disabled{opacity:.6;cursor:default}
+.status{font-size:13px;min-height:1.2em;color:var(--muted)}
+.status.err{color:var(--red)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">
+    <div class="mark" aria-hidden="true">MV</div>
+    <div>
+      <h1>YouTube <span>MaVo</span></h1>
+      <div class="handle">@martinvohralik · 350+ nemovitostí · strategie kanálu 2027</div>
+    </div>
+  </div>
+  <div class="facts">
+    <div class="fact"><b>3</b><small>série</small></div>
+    <div class="fact"><b>78</b><small>dílů za rok</small></div>
+    <div class="fact"><b>4. 1. 2027</b><small>start</small></div>
+  </div>
+</header>
+
+<p class="lead">Kanál stojí na třech nohách. Příběhy nemovitostí přitáhnou nové diváky, Akademie je naučí počítat a dá jim důvod tě sledovat, podcast v terénu prohloubí důvěru a přivede publikum hostů. Každá série vychází jednou za 2 týdny.</p>
+
+<div class="series">
+  <article class="show a">
+    <div class="tag">Noha 3 · start jako první</div>
+    <h2>Akademie kruté pravdy</h2>
+    <p>Fiktivní guru Mistr Pasivák (Martin v dvojroli) slíbí zázrak nebo „bezpečnou“ radu. Martin ji klidně spočítá a dá postup KROK 1–5.</p>
+    <dl class="meta"><dt>Délka</dt><dd>12–18 min</dd><dt>Vychází</dt><dd>úterý, liché týdny</dd><dt>Cílovka</dt><dd>22–40 let, první úspory</dd><dt>Výroba</dt><dd>nízká, sólo + dvojrole</dd><dt>Shorts</dt><dd>5–8 z dílu</dd></dl>
+    <details><summary>Struktura lekce</summary><ol><li>Skeč Pasiváka (cold open)</li><li>Znělka</li><li>Lekce dne</li><li>3 vrstvy: Pasivák tvrdí → Martin spočítá → realita</li><li>Co dělat místo toho: KROK 1–5</li><li>Domácí úkol</li><li>Caveat + CTA</li></ol></details>
+  </article>
+  <article class="show p">
+    <div class="tag">Noha 1 · podcast v terénu</div>
+    <h2>Na place</h2>
+    <p>Jediný realitní podcast, který se netočí ve studiu. Mluvíme tam, kde se dělá byznys: na stavbě, v činžáku, v autě cestou na prohlídku.</p>
+    <dl class="meta"><dt>Délka</dt><dd>35–60 min</dd><dt>Vychází</dt><dd>pátek, liché týdny</dd><dt>Cílovka</dt><dd>25–45 let, první až třetí byt</dd><dt>Výroba</dt><dd>střední, host + 2 kamery</dd><dt>Shorts</dt><dd>8–12 z dílu</dd></dl>
+    <details><summary>Struktura epizody</summary><ol><li>Nejsilnější věta hosta</li><li>Kde jsme: walk-through</li><li>Čísla na stůl</li><li>Rozhovor ve 3 blocích</li><li>Krutá pravda hosta</li><li>Rychlovka „Koupil bys, nebo ne?“</li><li>Outro + CTA</li></ol></details>
+  </article>
+  <article class="show z">
+    <div class="tag">Noha 2 · příběhy nemovitostí</div>
+    <h2>Co skrývají zdi</h2>
+    <p>Slavné a zvláštní domy očima investora. Každý díl končí verdiktem: kolik to stálo, kolik to stojí dnes a co bych s tím udělal.</p>
+    <dl class="meta"><dt>Délka</dt><dd>15–25 min</dd><dt>Vychází</dt><dd>čtvrtek, sudé týdny</dd><dt>Cílovka</dt><dd>široká, 18–60 let</dd><dt>Výroba</dt><dd>vysoká, rešerše + právní kontrola</dd><dt>Shorts</dt><dd>4–6 z dílu</dd></dl>
+    <details><summary>Struktura dílu</summary><ol><li>Nejbizarnější fakt (cold open)</li><li>Znělka</li><li>Místo dnes</li><li>Příběh ve 3 kapitolách</li><li>Čísla v čase se zdroji</li><li>Investorský verdikt</li><li>Pointa + CTA</li></ol></details>
+  </article>
+</div>
+
+<section id="kalendar">
+  <div class="sechead">
+    <h2>Roční kalendář 2027</h2>
+    <div class="filters" role="group" aria-label="Filtr série">
+      <button id="f-all" data-f="all" aria-pressed="true">Vše</button>
+      <button id="f-a" data-f="a" aria-pressed="false">Akademie</button>
+      <button id="f-p" data-f="p" aria-pressed="false">Na place</button>
+      <button id="f-z" data-f="z" aria-pressed="false">Co skrývají zdi</button>
+    </div>
+  </div>
+  <div class="count" id="count"></div>
+  <div id="cal"></div>
+</section>
+
+<section id="poznamky">
+  <div class="sechead"><h2>Poznámky týmu</h2></div>
+  <div class="tabs" role="tablist" aria-label="Poznámky">
+    <button role="tab" id="tab-irca" data-p="irca" aria-selected="true">Poznámky IRČA</button>
+    <button role="tab" id="tab-patrik" data-p="patrik" aria-selected="false">Poznámky Patrik</button>
+    <button role="tab" id="tab-filip" data-p="filip" aria-selected="false">Poznámky Filip</button>
+  </div>
+  <div class="notes-panel" role="tabpanel">
+    <div id="notes-list" aria-live="polite"><div class="empty">Načítám poznámky…</div></div>
+    <form class="notes-form" id="notes-form">
+      <label for="note-text" id="note-label">Nová poznámka</label>
+      <textarea id="note-text" maxlength="2000" placeholder="Napiš poznámku k sériím, dílům nebo plánu…"></textarea>
+      <label for="note-pin">Tvůj PIN</label>
+      <input id="note-pin" type="password" inputmode="numeric" autocomplete="current-password">
+      <button type="submit" id="note-save">Uložit poznámku</button>
+      <div class="status" id="note-status"></div>
+    </form>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><h2>Pravidla pro všechny série</h2></div>
+  <div class="rules">
+    <div class="rule"><h3>Tón</h3><p>Klidně, suchý humor, čísla na obrazovce. Žádný hype a žádné sliby rychlého zbohatnutí.</p></div>
+    <div class="rule"><h3>Čísla</h3><p>Výnos Praha 2–3 %, sever 5–6 %, nikdy nad 6 %. Žádná nemovitost pod 1.500.000,- Kč. Sazby, ceny a pravidla ČNB ověřit v týdnu natáčení.</p></div>
+    <div class="rule"><h3>Férovost</h3><p>U proti-intuitivních rad vždy caveat a „není to finanční poradenství“. Mistr Pasivák je fiktivní postava.</p></div>
+    <div class="rule"><h3>Příběhy domů</h3><p>Jen veřejně doložená fakta se zdroji. Soukromé majitele nejmenovat, točit z veřejného prostranství, kauzy s žijícími lidmi přes advokáta.</p></div>
+    <div class="rule"><h3>CTA</h3><p>Na konci každého dílu: „Sleduj mě a ukážu ti vše kolem nemovitostí“.</p></div>
+  </div>
+  <p style="margin:16px 0 0;font-size:13px;color:var(--muted)">Interní dokumenty (otevře je jen Martin a tým):</p>
+  <div class="links">
+    <a href="https://claude.ai/artifact/KkDbKJLhctc1E2EggAY4Bg" target="_blank" rel="noopener">Strategie 3 nohou (dokument)</a>
+    <a href="https://claude.ai/artifact/NhUVaVsLw86vWYJ6cCPa19" target="_blank" rel="noopener">Pilot Akademie: scénář</a>
+    <a href="https://claude.ai/artifact/CjbKqdCzUrKGNSbGRknczs" target="_blank" rel="noopener">Roční plán (dokument)</a>
+  </div>
+</section>
+
+<footer>Pracovní plán. Témata a data se můžou měnit; data vydání podle kalendáře 2027.</footer>
+</div>
+
+<script>
+const NAMES={a:"Akademie",p:"Na place",z:"Co skrývají zdi"};
+const MONTHS=["Leden","Únor","Březen","Duben","Květen","Červen","Červenec","Srpen","Září","Říjen","Listopad","Prosinec"];
+const A_D=["5.1","19.1","2.2","16.2","2.3","16.3","30.3","13.4","27.4","11.5","25.5","8.6","22.6","6.7","20.7","3.8","17.8","31.8","14.9","28.9","12.10","26.10","9.11","23.11","7.12","21.12"];
+const P_D=["8.1","22.1","5.2","19.2","5.3","19.3","2.4","16.4","30.4","14.5","28.5","11.6","25.6","9.7","23.7","6.8","20.8","3.9","17.9","1.10","15.10","29.10","12.11","26.11","10.12","23.12"];
+const Z_D=["14.1","28.1","11.2","25.2","11.3","25.3","8.4","22.4","6.5","20.5","3.6","17.6","1.7","15.7","29.7","12.8","26.8","9.9","23.9","7.10","21.10","4.11","18.11","2.12","16.12","30.12"];
+const A=[
+["Splať hypotéku co nejdřív! (Nebo ne?)","Mimořádná splátka vs. vklad do bytu, A vs. B s dnešními sazbami."],
+["Pasivní příjem bez práce","Co všechno stojí za „pasivním“ nájmem: správa, neobsazenost, opravy."],
+["Inflace tě zničí, dej všechno do zlata","Inflace zničí hotovost, ale zmenšuje dluh a zvedá nájmy. Spočítané na 10 let."],
+["40letá hypotéka je past","Nižší splátka, vyšší cashflow, víc úroků. Kdy to dává smysl a kdy ne."],
+["Končí ti fixace? Splať to!","Refinancovat, prodloužit, nebo splácet. Postup krok za krokem."],
+["Každý dluh je zlo","Dobrý dluh splácí někdo jiný, špatný dluh splácíš ty."],
+["Daň z nájmu? Prostě zaplať","Paušál vs. skutečné výdaje a odpisy, před termínem přiznání."],
+["Kup ten nejlevnější byt","Proč nejlevnější byt bývá nejdražší: lokalita, neobsazenost, SVJ."],
+["Počkej, až ceny spadnou","Kolik tě stojí rok čekání na nájmu a na růstu cen."],
+["Kup byt v Dubaji","Náklady, měna, právo a správa na dálku vs. byt na severu."],
+["Nájem je vyhazování peněz","Člověk A vs. B: vlastní bydlení vs. nájem a investiční byt."],
+["Hlavně kupuj v Praze","Praha 2–3 % vs. sever 5–6 % čistého výnosu."],
+["Makléř je tvůj kamarád","Pro koho makléř pracuje a jak vyjednat nižší cenu."],
+["Airbnb tě udělá bohatým","Krátkodobý vs. dlouhodobý pronájem: obsazenost, práce, pravidla."],
+["Starý byt? Vybourej všechno!","Refresh vs. kompletní rekonstrukce, kam dát peníze."],
+["Nájemníka vyber podle sympatie","Jak si nájemníka prověřit, než podepíše."],
+["Smlouvu stáhni z internetu","Co musí být v nájemní smlouvě, aby tě chránila."],
+["Kauce stačí","Co dělat, když nájemník přestane platit, den po dni."],
+["Bílé zdi a hotovo","Design, který pronajímá: správně × špatně."],
+["Rezerva je pro slabochy","Kolik mít rezervy na byt a proč to není mrtvý kapitál."],
+["Fond je bezpečnější než byt","Papír vs. cihla: poplatky, likvidita, kontrola."],
+["Garantuju ti 20 % ročně","Hrubý vs. čistý výnos a jak poznat nabídku, která je moc dobrá."],
+["Kupuj všechno na firmu","Na sebe, nebo na firmu: kdy co dává smysl."],
+["Státní důchod ti bude stačit","Kolik bude důchod a kolik bytů potřebuješ na druhý důchod."],
+["Kupuj, kupuj, kupuj","Proč portfolio potřebuje pravidelný úklid a kdy byt pustit."],
+["Mistr Pasivák skládá zkoušku","Finále roku: best of, test diváků a co čekat v roce 2028."]];
+const P=[
+["Co banka vidí, když přijdeš","Hypoteční specialista v autě: příjem, LTV, DSTI a co dělat, když banka řekne ne."],
+["Můj první byt: rok poté","Začínající investor ve svém bytě: reálná čísla po prvním roce."],
+["Kolik daně zaplatíš z tohohle bytu","Daňový poradce v pronajatém bytě, před termínem přiznání."],
+["Kde se to zasekne po třetím bytu","Investor s 2–3 byty: bonita, čas a správa."],
+["Jak banka oceňuje byt","Odhadce při ohledu bytu. Martin je taky odhadce, může oponovat."],
+["Praha vs. sever: dva investoři, jeden rozpočet","Pražský investor v autě z Prahy do Bíliny."],
+["Jeden den: 5 prohlídek, 1 nákup","Celý den v terénu a proč čtyři byty odmítneš."],
+["Makléř bez obalu","Makléř na prohlídce: co ti neřekne a jak s ním vyjednávat."],
+["Podpis, úschova, katastr","Advokát: kde se při koupi dělají nejdražší chyby."],
+["Kupuju činžák, kterým všichni pohrdají","Správce, dům na severu: prohlídka a výpočet."],
+["Jak koupit v dražbě","Dražebník nebo advokát: jak dražba funguje a rizika."],
+["Novostavba, nebo starý byt?","Developer na stavbě: cena za m², nájem a výnos."],
+["Kolik tě reálně stojí rekonstrukce","Stavbyvedoucí v bytě uprostřed reko: rozpočet vs. realita."],
+["Proč tvůj byt nikdo nechce","Designérka v bytě před home stagingem: správně × špatně."],
+["Co ti řemeslník zatajil","Elektrikář a instalatér: skryté vady."],
+["Výměna střechy na domě","Pokrývač na střeše: co stojí střecha a fasáda. Timelapse na Shorts."],
+["Tohle nebourej","Statik nebo stavební dozor: kdy se zdí nesahat."],
+["První den na trhu","Fotograf a home staging: jak zkrátit dobu prázdného bytu."],
+["Den se správcem 350+ nemovitostí","Jak vypadá správa ve velkém a neobsazenost pod 4,5 %."],
+["Nájemník přestal platit","Advokát na nájemní právo: od upomínky po vyklizení."],
+["Účetnictví portfolia","Účetní: stovky bytů, systémy Notion a Freelo."],
+["SVJ a sousedé","Předseda SVJ: kdo rozhoduje o tvém domě."],
+["Investor s 50+ byty","Velký investor: škálování, holding, co by nikomu neradil."],
+["Fixace v roce 2028","Bankéř nebo broker: refinancování a scénáře sazeb."],
+["Proč sever","Starosta nebo místní podnikatel: jak se město mění."],
+["Otázky diváků v terénu","Nejlepší otázky z komentářů za rok, procházka bytem."]];
+const Z=[
+["Kostel, který ujel po kolejích","Most 1975: přesun kostela o 841,1 m a město zbořené kvůli uhlí."],
+["Zámek nad lomem","Jezeří: zámek, který měl spadnout do dolu, a jeho záchrana."],
+["Duchcov: zámek, kde zemřel Casanova","Historie zámku a proč je dnes Duchcov levnější než Teplice."],
+["Teplice: nejstarší lázně","Jak lázně udělaly město a co z toho zbylo v cenách bytů."],
+["Hotel na vrcholu hory","Ještěd: stavba, která se nedá kopírovat."],
+["Koupil jsem byt a peníze poslal do vězení","Martinův příběh: nákup od majitele ve vězení, notář ve Valdicích."],
+["Tančící dům","Jak vznikl, kdo ho vlastnil a kolik stojí dnes."],
+["Lucerna: palác rodiny Havlů","Stavba Havlova dědečka, restituce a prodej podílu."],
+["Žižkovská věž","Nejošklivější stavba, nebo chytrá investice?"],
+["Koupili hotel, aby ho zbořili","Hotel Praha v Dejvicích, zbořený 2014."],
+["Bunkr pod Václavským náměstím","Protiatomový kryt pod hotelem Jalta."],
+["Barrandovské terasy","Prvorepublikový luxus, chátrání a obnova."],
+["Palác, který byl bankou i gestapem","Petschkův palác: od bankovního domu po památník."],
+["Vila, ze které utekl Krejčíř","Z odhadu 97.290.000,- Kč na dražbu za 21.380.000,- Kč a nabídku cca 55.000.000,- Kč."],
+["Brutalismus, který padl","Transgas: proč se zbořil a co tam stojí dnes."],
+["Lázně, které nikdo nechce","Kyselka: slavné lázně, chátrání a pokusy o obnovu."],
+["Zámek za korunu","Proč se zámky prodávaly za symbolickou cenu a kolik stojí opravit."],
+["Nejdražší ulice v Česku","Pařížská: nájmy a ceny bytů ve srovnání se severem."],
+["Nejdražší byt, jaký se v ČR prodal","Kdo kupuje byty za stovky milionů a dává to smysl?"],
+["Vila Tugendhat","Ikona UNESCO: kolik by stála dnes."],
+["Müllerova vila","Loosova vila a co si z ní vzít pro design bytu."],
+["Nejmenší byt v Praze","Kolik metrů stačí k bydlení a cena za m² u mikrobytů."],
+["Z kostela byty","Konverze kostela nebo fary na bydlení."],
+["Bydlení ve vodárně","Vodárny, továrny a mlýny přestavěné na byty."],
+["Nejpodivnější inzeráty roku","Nejbizarnější nabídky ze Sreality za rok 2027."],
+["25 domů, jeden verdikt","Rekapitulace: který dům bych koupil a za kolik."]];
+const eps=[];
+[["a",A,A_D],["p",P,P_D],["z",Z,Z_D]].forEach(([s,list,dates])=>list.forEach((e,i)=>{
+  const [d,m]=dates[i].split(".").map(Number);
+  eps.push({s,n:i+1,d,m,t:e[0],x:e[1],key:m*100+d});
+}));
+eps.sort((a,b)=>a.key-b.key);
+const cal=document.getElementById("cal"),count=document.getElementById("count");
+function esc(t){const el=document.createElement("span");el.textContent=t;return el.innerHTML}
+function render(f){
+  const list=eps.filter(e=>f==="all"||e.s===f);
+  count.textContent=list.length+" dílů";
+  let html="",cur=0;
+  list.forEach(e=>{
+    if(e.m!==cur){if(cur)html+="</div>";cur=e.m;html+='<div class="month"><h3>'+MONTHS[e.m-1]+"</h3>";}
+    const pilot=e.s==="a"&&e.n===1?" pilot":"";
+    html+='<div class="ep '+e.s+pilot+'"><div class="d">'+e.d+". "+e.m+'.</div><div class="s">'+NAMES[e.s]+'</div><div class="body"><div class="t"><span class="n">#'+e.n+"</span>"+esc(e.t)+'</div><div class="x">'+esc(e.x)+"</div></div></div>";
+  });
+  if(cur)html+="</div>";
+  cal.innerHTML=html;
+}
+let saved="all";try{saved=localStorage.getItem("mavo-f")||"all"}catch(e){}
+function setF(f){
+  document.querySelectorAll(".filters button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.f===f)));
+  render(f);try{localStorage.setItem("mavo-f",f)}catch(e){}
+}
+document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>setF(b.dataset.f)));
+setF(["all","a","p","z"].includes(saved)?saved:"all");
+
+const PEOPLE={irca:"IRČA",patrik:"Patrik",filip:"Filip"};
+let person="irca";
+const nList=document.getElementById("notes-list"),nForm=document.getElementById("notes-form"),nText=document.getElementById("note-text"),nPin=document.getElementById("note-pin"),nSave=document.getElementById("note-save"),nStatus=document.getElementById("note-status");
+function status(msg,err){nStatus.textContent=msg||"";nStatus.className="status"+(err?" err":"")}
+function fmt(iso){const d=new Date(iso);return d.toLocaleDateString("cs-CZ")+" "+d.toLocaleTimeString("cs-CZ",{hour:"2-digit",minute:"2-digit"})}
+function loadPin(){try{nPin.value=localStorage.getItem("mavo-pin-"+person)||""}catch(e){nPin.value=""}}
+function savePin(){try{localStorage.setItem("mavo-pin-"+person,nPin.value)}catch(e){}}
+async function api(method,body){
+  const opt={method,headers:{"Content-Type":"application/json"}};
+  let url="/api/notes";
+  if(method==="GET")url+="?person="+person;else opt.body=JSON.stringify(Object.assign({person},body));
+  let r;try{r=await fetch(url,opt)}catch(e){throw new Error("Poznámky teď nejdou načíst. Zkontroluj připojení.")}let data={};try{data=await r.json()}catch(e){}
+  if(!r.ok)throw new Error(data.error||"Poznámky se nepodařilo načíst.");
+  return data;
+}
+async function loadNotes(){
+  const p=person;
+  nList.innerHTML='<div class="empty">Načítám poznámky…</div>';
+  try{
+    const {notes}=await api("GET");if(p!==person)return;
+    if(!notes.length){nList.innerHTML='<div class="empty">'+PEOPLE[p]+' zatím nic nenapsal(a). První poznámku přidáš ve formuláři.</div>';return}
+    nList.innerHTML="";
+    notes.forEach(n=>{
+      const el=document.createElement("div");el.className="note";
+      const w=document.createElement("div");w.className="when";w.textContent=fmt(n.at);
+      const del=document.createElement("button");del.type="button";del.className="del";del.textContent="Smazat";
+      del.addEventListener("click",async()=>{
+        if(!nPin.value){status("Pro smazání zadej PIN.",true);nPin.focus();return}
+        if(del.dataset.confirm!=="1"){del.dataset.confirm="1";del.textContent="Opravdu smazat?";return}
+        try{await api("DELETE",{id:n.id,pin:nPin.value});savePin();status("Smazáno.");loadNotes()}catch(e){status(e.message,true)}
+      });
+      w.appendChild(del);
+      const t=document.createElement("p");t.textContent=n.text;
+      el.append(w,t);nList.appendChild(el);
+    });
+  }catch(e){nList.innerHTML="";const d=document.createElement("div");d.className="empty";d.textContent=e.message;nList.appendChild(d)}
+}
+function setPerson(p){
+  person=p;
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.p===p)));
+  document.getElementById("note-label").textContent="Nová poznámka ("+PEOPLE[p]+")";
+  status("");loadPin();loadNotes();
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setPerson(b.dataset.p)));
+nForm.addEventListener("submit",async ev=>{
+  ev.preventDefault();
+  if(!nText.value.trim()){status("Napiš text poznámky.",true);return}
+  if(!nPin.value){status("Zadej svůj PIN.",true);return}
+  nSave.disabled=true;status("Ukládám…");
+  try{await api("POST",{text:nText.value,pin:nPin.value});savePin();nText.value="";status("Uloženo, vidí to všichni.");loadNotes()}
+  catch(e){status(e.message,true)}
+  finally{nSave.disabled=false}
+});
+setPerson("irca");
+</script>
+</body>
+</html>
