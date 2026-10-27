@@ -97,6 +97,59 @@ footer{margin-top:48px;font-size:13px;color:var(--muted)}
 .notes-form button:disabled{opacity:.6;cursor:default}
 .status{font-size:13px;min-height:1.2em;color:var(--muted)}
 .status.err{color:var(--red)}
+
+.sitenav{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-top:4px;overflow-x:auto}
+.sitenav a{font-weight:600;font-size:15px;text-decoration:none;color:var(--muted);padding:12px 18px;border-bottom:3px solid transparent;white-space:nowrap}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--red)}
+.sitenav a:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+.view{padding-top:6px}
+.channel{margin-top:22px}
+.banner{background:linear-gradient(110deg,var(--red),#b80000);color:#fff;border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;gap:4px;min-height:120px;justify-content:flex-end}
+.banner span{font-family:var(--display);font-size:clamp(36px,6vw,56px);line-height:1}
+.banner b{font-weight:500;font-size:15px;opacity:.9}
+.chead{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;padding:20px 0 8px}
+.avatar{width:96px;height:96px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--display);font-size:40px;flex:none}
+.cinfo{flex:1 1 320px;min-width:0}
+.cinfo h2{font-size:40px}
+.cinfo p{margin:8px 0 0;max-width:68ch}
+.cta-pill{background:var(--ink);color:var(--bg);border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px;align-self:center}
+.ctabs{margin-top:10px}
+.cpanel{padding-top:22px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:1000px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.grid4{grid-template-columns:1fr}}
+.vcard h3{font-family:var(--body);font-weight:600;font-size:16px;line-height:1.35;letter-spacing:0;margin:10px 0 4px}
+.vcard p{margin:0;font-size:14px;color:var(--muted)}
+.thumb{aspect-ratio:16/9;max-width:100%;border-radius:12px;color:#fff;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:12px 14px;overflow:hidden}
+.thumb b{font-family:var(--display);font-weight:400;font-size:64px;line-height:.9}
+.thumb span{font-family:var(--display);font-size:24px;line-height:1}
+.thumb em{position:absolute;right:8px;bottom:8px;font-style:normal;font-size:12px;font-weight:600;background:rgba(0,0,0,.8);padding:2px 6px;border-radius:4px}
+.thumb.small{aspect-ratio:auto;width:72px;height:72px;padding:0;align-items:center;justify-content:center;flex:none}
+.thumb.small b{font-size:44px}
+.t1{background:#ff0000;color:#fff}.t2{background:#282828;color:#fff}.t3{background:#606060;color:#fff}.t4{background:#a50000;color:#fff}
+.open{display:inline-block;font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.02em;text-transform:none;background:#fff4c2;color:#5c4600;border:1px solid #e8cf5a;border-radius:999px;padding:1px 8px;vertical-align:3px;margin-left:6px}
+.sub{font-size:28px;margin:30px 0 10px}
+.ratio{display:flex;height:34px;border-radius:6px;overflow:hidden;font-size:13px;font-weight:600}
+.ratio span{display:flex;align-items:center;padding:0 10px;white-space:nowrap;overflow:hidden}
+.note-s{color:var(--muted);font-size:14px;margin:10px 0 18px}
+.tablewrap{overflow-x:auto;margin-bottom:8px}
+.tablewrap table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+.tablewrap th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:2px solid var(--ink);padding:8px 10px}
+.tablewrap td{border-bottom:1px solid var(--line);padding:10px;vertical-align:top}
+.persona{border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:18px;background:var(--surface)}
+.phead{display:flex;gap:14px;align-items:center;margin-bottom:10px}
+.phead h3{font-family:var(--body);font-weight:600;font-size:20px;letter-spacing:0}
+.pmeta{color:var(--muted);font-size:14px}
+.persona>p{margin:0 0 12px;max-width:75ch}
+.persona dl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:8px 16px;margin:0;font-size:14px}
+@media (max-width:600px){.persona dl{grid-template-columns:1fr}.persona dt{margin-top:6px}}
+.persona dt{font-weight:600}
+.persona dd{margin:0}
+.persona ul{margin:0;padding-left:18px}
+.openbox{background:#fff8d6;color:#4a3a00;border:1px solid #e8cf5a;border-radius:8px;padding:10px 14px}
+.qlist{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;max-width:80ch}
+.qlist li{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:var(--surface)}
+.qlist li.hot{border-color:#e8cf5a;background:#fff8d6;color:#4a3a00}
 </style>
 </head>
 <body>
@@ -115,7 +168,12 @@ footer{margin-top:48px;font-size:13px;color:var(--muted)}
     <div class="fact"><b>4. 1. 2027</b><small>start</small></div>
   </div>
 </header>
+<nav class="sitenav" aria-label="Sekce webu">
+  <a href="#youtube" id="nav-youtube" data-v="youtube" aria-current="page">YouTube série</a>
+  <a href="#pr" id="nav-pr" data-v="pr">PR strategie</a>
+</nav>
 
+<div id="view-youtube" class="view">
 <p class="lead">Kanál stojí na třech nohách. Příběhy nemovitostí přitáhnou nové diváky, Akademie je naučí počítat a dá jim důvod tě sledovat, podcast v terénu prohloubí důvěru a přivede publikum hostů. Každá série vychází jednou za 2 týdny.</p>
 
 <div class="series">
@@ -156,6 +214,172 @@ footer{margin-top:48px;font-size:13px;color:var(--muted)}
   <div id="cal"></div>
 </section>
 
+<section>
+  <div class="sechead"><h2>Pravidla pro všechny série</h2></div>
+  <div class="rules">
+    <div class="rule"><h3>Tón</h3><p>Klidně, suchý humor, čísla na obrazovce. Žádný hype a žádné sliby rychlého zbohatnutí.</p></div>
+    <div class="rule"><h3>Čísla</h3><p>Výnos Praha 2–3 %, sever 5–6 %, nikdy nad 6 %. Žádná nemovitost pod 1.500.000,- Kč. Sazby, ceny a pravidla ČNB ověřit v týdnu natáčení.</p></div>
+    <div class="rule"><h3>Férovost</h3><p>U proti-intuitivních rad vždy caveat a „není to finanční poradenství“. Mistr Pasivák je fiktivní postava.</p></div>
+    <div class="rule"><h3>Příběhy domů</h3><p>Jen veřejně doložená fakta se zdroji. Soukromé majitele nejmenovat, točit z veřejného prostranství, kauzy s žijícími lidmi přes advokáta.</p></div>
+    <div class="rule"><h3>CTA</h3><p>Na konci každého dílu: „Sleduj mě a ukážu ti vše kolem nemovitostí“.</p></div>
+  </div>
+  <p style="margin:16px 0 0;font-size:13px;color:var(--muted)">Interní dokumenty (otevře je jen Martin a tým):</p>
+  <div class="links">
+    <a href="https://claude.ai/artifact/KkDbKJLhctc1E2EggAY4Bg" target="_blank" rel="noopener">Strategie 3 nohou (dokument)</a>
+    <a href="https://claude.ai/artifact/NhUVaVsLw86vWYJ6cCPa19" target="_blank" rel="noopener">Pilot Akademie: scénář</a>
+    <a href="https://claude.ai/artifact/CjbKqdCzUrKGNSbGRknczs" target="_blank" rel="noopener">Roční plán (dokument)</a>
+  </div>
+</section>
+</div>
+
+<div id="view-pr" class="view" hidden>
+  <div class="channel">
+    <div class="banner"><span>PR strategie</span><b>4 cílovky · 1 kanál · 1 DNA</b></div>
+    <div class="chead">
+      <div class="avatar" aria-hidden="true">MV</div>
+      <div class="cinfo">
+        <h2>Martin Vohralík</h2>
+        <div class="handle">@martinvohralik · 350+ nemovitostí · 4 cílovky</div>
+        <p>Jeden kanál, čtyři cílovky, jedna společná DNA: dluh a hypotéka proti intuici a čísla na slidu 2–3. Liší se jen vstupní dveře do obsahu a to, kam člověka po obsahu posíláme. Konverze se děje ve stories, e-mailu a na webu.</p>
+      </div>
+      <div class="cta-pill">Sleduj mě a ukážu ti vše kolem nemovitostí</div>
+    </div>
+    <div class="tabs ctabs" role="tablist" aria-label="PR strategie">
+      <button role="tab" id="ct-prehled" data-c="prehled" aria-selected="true">Přehled</button>
+      <button role="tab" id="ct-cilovky" data-c="cilovky" aria-selected="false">Cílovky</button>
+      <button role="tab" id="ct-kanaly" data-c="kanaly" aria-selected="false">Kanály</button>
+      <button role="tab" id="ct-serie" data-c="serie" aria-selected="false">Napojení na série</button>
+      <button role="tab" id="ct-otazky" data-c="otazky" aria-selected="false">Otevřené otázky</button>
+    </div>
+  </div>
+
+  <div class="cpanel" data-cp="prehled">
+    <div class="grid4">
+      <article class="vcard"><div class="thumb t1"><b>1</b><span>Neinvestoři</span><em>40 %</em></div><h3>Lidi, kteří ještě neinvestují</h3><p>Zaměstnanci 28–45 let s úsporami na účtu. Cíl: spolupráce a garantovaný byt přes investujbezstarosti.cz.</p></article>
+      <article class="vcard"><div class="thumb t2"><b>2</b><span>V nemovitostech</span><em>30 %</em></div><h3>Lidi, co už dělají nemovitosti</h3><p>Mají 1–5 bytů, makléři, flipaři. Cíl: autorita a ohřev na workshop.</p></article>
+      <article class="vcard"><div class="thumb t3"><b>3</b><span>Byznysmeni</span><em>20 %</em></div><h3>Byznysmeni a majitelé firem <span class="open">Otevřená otázka</span></h3><p>Majitelé firem 45–65 let, část uvažuje o prodeji nebo předání. Cíl: investice a spolupráce.</p></article>
+      <article class="vcard"><div class="thumb t4"><b>4</b><span>Sportovci</span><em>10 %</em></div><h3>Úspěšní sportovci</h3><p>Aktivní i končící profesionálové s krátkou kariérou. Cíl: investice a skládání portfolia.</p></article>
+    </div>
+    <h3 class="sub">Poměr obsahu</h3>
+    <div class="ratio" role="img" aria-label="Poměr obsahu: 40 % cílovka 1, 30 % cílovka 2, 20 % cílovka 3, 10 % cílovka 4">
+      <span class="t1" style="flex:40">1 · 40 %</span><span class="t2" style="flex:30">2 · 30 %</span><span class="t3" style="flex:20">3 · 20 %</span><span class="t4" style="flex:10">4</span>
+    </div>
+    <p class="note-s">Cílovka 1 a 2 nesou dosah, 3 a 4 hodnotu jednoho kontaktu. Stačí jim méně, ale přesnějších dílů.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Cílovka</th><th>Hlavní páka obsahu</th><th>Kde konvertuje</th></tr></thead>
+      <tbody>
+        <tr><td>1 Neinvestoři</td><td>„Nemusíš řešit vůbec nic“ + A vs. B nájem, úspory, byt</td><td>IG stories, lead magnet v Brevu, web</td></tr>
+        <tr><td>2 Lidi v nemovitostech</td><td>Řízení portfolia, financování po 3. bytu, čísla z 350+ nemovitostí</td><td>E-mail list, waiting list jen v kampani</td></tr>
+        <tr><td>3 Byznysmeni</td><td>Generační obměna firem, hotovost na účtech, holding</td><td>Web a formulář, osobní schůzka mimo DM</td></tr>
+        <tr><td>4 Sportovci</td><td>„Kariéra končí, majetek hraje dál“</td><td>Doporučení, web a formulář, stories</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="cpanel" data-cp="cilovky" hidden>
+    <article class="persona p1">
+      <div class="phead"><div class="thumb t1 small"><b>1</b></div><div><h3>Lidi, kteří ještě neinvestují</h3><div class="pmeta">Persona „Petra“, 34 let · 40 % obsahu</div></div></div>
+      <p>Zaměstnankyně, 400–800 tis. Kč na spořicím účtu, bydlí v nájmu nebo splácí vlastní byt. Neví, kde začít, a nemá čas ani chuť řešit nájemníky.</p>
+      <dl>
+        <dt>Bolesti</dt><dd>Peníze ztrácí hodnotu, strach z dluhu, strach, že to přijde pozdě, nedůvěra k fondům i ke „guru“, žádný čas na správu, státní důchod.</dd>
+        <dt>Co chce</dt><dd>Aby to někdo spočítal za ni a řekl, že to jde bez starostí. Ne výuku, ale důvěru a jednoduchý první krok.</dd>
+        <dt>Témata</dt><dd><ul><li>Nájem není vyhazování peněz, Člověk A vs. B</li><li>Peníze na účtu vs. byt (číslo o úsporách ověřit v ČNB)</li><li>Nikdy si neber hypotéku, nebo? a série Dluh je zbraň</li><li>Druhý důchod z bytu</li><li>Nechci být správce: co stojí za „pasivním“ nájmem</li><li>Garantovaný vs. běžný pronájem (Bílina 2+1 za 2.290.000,- Kč, garantovaný nájem 10.279,- Kč/měs = 5,39 % p.a., stav 05/2026, ověřit)</li></ul></dd>
+        <dt>Formáty</dt><dd>Reels s hookem proti bezpečné radě, carousely A vs. B a KROK 1–5, podcast klipy, YouTube AKADEMIE.</dd>
+        <dt>Cesta</dt><dd>Reel nebo carousel → follow → stories s Q&amp;A → lead magnet v Brevu → e-mailová série → investujbezstarosti.cz. Produkt se prodává ve stories, ne odkazem v postu.</dd>
+        <dt>Pozor</dt><dd>Výnosy jen 5–6 % na severu, žádné sliby jistého zbohatnutí. U garance vždy: smluvní závazek na dobu smlouvy, poplatek 590,- Kč/měs.</dd>
+      </dl>
+    </article>
+    <article class="persona p2">
+      <div class="phead"><div class="thumb t2 small"><b>2</b></div><div><h3>Lidi, co už dělají nemovitosti</h3><div class="pmeta">Persona „Tomáš“, 38 let · 30 % obsahu</div></div></div>
+      <p>Má 2–4 byty, někdy flipuje. Narazil na strop: banka už nepůjčí, čas mu žere správa, neví, který byt pustit. Patří sem i makléři a řemeslníci, kteří chtějí začít investovat.</p>
+      <dl>
+        <dt>Bolesti</dt><dd>Zaseknutí po třetím bytu (bonita, LTV, DSTI), neobsazenost a neplatiči, daně a struktura, drahé rekonstrukce, chaos v systému.</dd>
+        <dt>Co chce</dt><dd>Know-how, které jinde nedostane: řízení portfolia ve velkém, systémy a čísla z 350+ nemovitostí. Financování je „easy věc“, nejvíc chyb je v řízení portfolia.</dd>
+        <dt>Témata</dt><dd><ul><li>Banka nepůjčí na další byt</li><li>Neobsazenost pod 4,5 % jako alfa omega portfolia</li><li>Kupuj, kupuj, kupuj: kdy byt pustit</li><li>Hrubý vs. čistý výnos, odpisy, paušál vs. skutečné výdaje</li><li>Rekonstrukce před/po a design správně × špatně</li><li>Systémy: Notion, Freelo, náklady na rok dopředu</li></ul></dd>
+        <dt>Formáty</dt><dd>Carousely KROK 1–5, timelapse rekonstrukcí, YouTube NA PLACE, newsletter s case study.</dd>
+        <dt>Cesta</dt><dd>NA PLACE a AKADEMIE → lead magnet pro pokročilé → Brevo list „pokročilí“ → workshop nebo mastermind (waiting list jen v kampani).</dd>
+        <dt>Pozor</dt><dd>Autoritu nesou konkrétní čísla a postupy, ne obecný mindset.</dd>
+      </dl>
+    </article>
+    <article class="persona p3">
+      <div class="phead"><div class="thumb t3 small"><b>3</b></div><div><h3>Byznysmeni a majitelé firem <span class="open">Otevřená otázka</span></h3><div class="pmeta">Persona „Jiří“, 55 let · 20 % obsahu</div></div></div>
+      <p class="openbox">Bod 3 zatím není dopsaný. Pracovně ho bereme jako podnikatele, kteří časem prodají nebo předají firmu a chtějí výnos reinvestovat do nemovitostí. Čeká na Martinovo rozhodnutí.</p>
+      <p>Majitel střední firmy, děti firmu převzít nechtějí. Na účtech leží hotovost, firma často vlastní i budovu. Nechce další práci, chce klidný majetek pro rodinu.</p>
+      <dl>
+        <dt>Bolesti</dt><dd>Co s penězi po prodeji, inflace na účtu, daně při prodeji a předání dětem, nedůvěra k fondům, žádný čas na správu, firma vs. budova.</dd>
+        <dt>Co chce</dt><dd>Partnera na úrovni, ne influencera. Martin je sám podnikatel (zdravotnictví, BrokerTrust, optiky, kolem 200 lidí).</dd>
+        <dt>Témata</dt><dd><ul><li>Série „Kdo převezme české firmy?“ (J&amp;T Banka Business Report 2026: 31 % majitelů ze 103 podniků uvažuje o odchodu nebo prodeji do 5 let)</li><li>Firmu prodáš. Musíš prodat i budovu?</li><li>Na sebe, nebo na firmu, holding a předání dětem (ověřit s daňovým poradcem)</li><li>Papír vs. cihla: fond vs. vlastní portfolio</li><li>Za hotovost jeden byt, s pákou pět</li></ul></dd>
+        <dt>Formáty</dt><dd>LinkedIn, YouTube rozhovory s podnikateli (NA PLACE), delší carousely s čísly, PR v byznys médiích.</dd>
+        <dt>Cesta</dt><dd>LinkedIn + YouTube → e-mail list „podnikatelé“ → formulář na webu → osobní schůzka. Nikdy DM.</dd>
+        <dt>Pozor</dt><dd>Netvrdit, že Martin radí s prodejem firem nebo firmy kupuje.</dd>
+      </dl>
+    </article>
+    <article class="persona p4">
+      <div class="phead"><div class="thumb t4 small"><b>4</b></div><div><h3>Úspěšní sportovci</h3><div class="pmeta">Persona „Lukáš“, 27 let · 10 % obsahu</div></div></div>
+      <p>Prvoligový hráč nebo hokejista, vysoký příjem na 8–12 let, pak konec. Kolem něj agenti, kluby a „kamarádi“ s fondy a drahými auty.</p>
+      <dl>
+        <dt>Bolesti</dt><dd>Kariéra končí, lifestyle ne. Příjem je krátký a nepravidelný, banka ho po kariéře čte jinak. Tlak okolí na utrácení.</dd>
+        <dt>Co chce</dt><dd>Systém a disciplínu, kterou zná ze sportu, a člověka, který mu nic nevnucuje.</dd>
+        <dt>Témata</dt><dd><ul><li>Sportovní kariéra končí, majetek hraje dál</li><li>Sportovec investoval vs. rozhazoval</li><li>Oni Porsche, já cihly</li><li>Fond, který ti nabízí klub: kolik si nechá</li><li>Jak být bonitní i po kariéře: koupit, dokud máš příjem</li></ul></dd>
+        <dt>Formáty</dt><dd>Sportovci jako hosté v NA PLACE, IG collab posty, split-screen carousely, krátké klipy.</dd>
+        <dt>Cesta</dt><dd>Collab obsah → jeho fanoušci a spoluhráči → doporučení v šatně → formulář na webu → osobní schůzka.</dd>
+        <dt>Pozor</dt><dd>Jména sportovců jen s jejich souhlasem. Žádná klubová loga v AI vizuálech.</dd>
+      </dl>
+    </article>
+  </div>
+
+  <div class="cpanel" data-cp="kanaly" hidden>
+    <p class="note-s">Týdně 1–2 YouTube díly podle ročního plánu, z nich 3–5 klipů a k tomu 3 vlastní IG posty.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Kanál</th><th>Frekvence</th><th>Cílovky</th><th>Co tam dáváme</th></tr></thead>
+      <tbody>
+        <tr><td>IG Reels</td><td>4–5× týdně</td><td>1, 2</td><td>Podcast klipy, hook proti bezpečné radě, timelapse reko</td></tr>
+        <tr><td>IG carousely</td><td>2–3× týdně</td><td>1, 2, 4</td><td>A vs. B, KROK 1–5, design správně × špatně, split-screen sportovec</td></tr>
+        <tr><td>IG stories</td><td>denně</td><td>1, 2</td><td>Q&amp;A, „skóre bytu“, zákulisí, investujbezstarosti.cz</td></tr>
+        <tr><td>YouTube dlouhé</td><td>1–2× týdně</td><td>2, 3, 1</td><td>AKADEMIE, NA PLACE, CO SKRÝVAJÍ ZDI</td></tr>
+        <tr><td>YouTube Shorts</td><td>3–5× týdně</td><td>1</td><td>Klipy z dlouhých dílů</td></tr>
+        <tr><td>LinkedIn</td><td>2× týdně</td><td>3, 2</td><td>Byznysový úhel: generační obměna, holding, systémy</td></tr>
+        <tr><td>Facebook</td><td>přebrat IG</td><td>1 (35+)</td><td>Reels a carousely beze změny</td></tr>
+        <tr><td>E-mail (Brevo)</td><td>1× týdně</td><td>všechny</td><td>Listy: začátečníci, pokročilí, podnikatelé, sportovci</td></tr>
+        <tr><td>PR v médiích</td><td>1× měsíčně</td><td>3, 4</td><td>Rozhovor nebo komentář v byznys médiu, host v cizím podcastu</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="cpanel" data-cp="serie" hidden>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Série</th><th>Role</th><th>Hlavní cílovky</th><th>Díly pro cílovku 3 a 4</th></tr></thead>
+      <tbody>
+        <tr><td>AKADEMIE KRUTÉ PRAVDY</td><td>Dosah + vzdělání</td><td>1 (bloky 1–2), 2 (bloky 3–4)</td><td>10 Dubaj, 21 Fond vs. byt, 22 Garantuju 20 %, 23 Na firmu</td></tr>
+        <tr><td>NA PLACE</td><td>Autorita v terénu</td><td>2, pak 1</td><td>19 Správce, 23 Investor s 50+ byty, 25 Proč sever</td></tr>
+        <tr><td>CO SKRÝVAJÍ ZDI</td><td>Čistý dosah, noví diváci</td><td>1, všichni</td><td>8 Lucerna, 10 Hotel Praha, 18 Pařížská, 19 Nejdražší byt</td></tr>
+      </tbody>
+    </table></div>
+    <h3 class="sub">Navrhované výměny dílů <span class="open">Čeká na schválení</span></h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Série</th><th>Původní díl</th><th>Nově</th><th>Cílovka</th></tr></thead>
+      <tbody>
+        <tr><td>NA PLACE</td><td>12 Novostavba, nebo starý byt? (11. 6.)</td><td>Prodal jsem firmu. Co s penězi?</td><td>3</td></tr>
+        <tr><td>NA PLACE</td><td>22 SVJ a sousedé (29. 10.)</td><td>Kariéra končí, majetek hraje dál</td><td>4</td></tr>
+        <tr><td>AKADEMIE</td><td>17 Smlouvu stáhni z internetu (17. 8.)</td><td>Jsi profesionál, tak utrácej jako profesionál</td><td>4</td></tr>
+        <tr><td>AKADEMIE</td><td>25 Kupuj, kupuj, kupuj (7. 12.)</td><td>Prodej firmu a všechno dej do fondu</td><td>3</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note-s">Kalendář v záložce YouTube série zatím ukazuje původní díly. Po schválení výměny přepíšu.</p>
+  </div>
+
+  <div class="cpanel" data-cp="otazky" hidden>
+    <ul class="qlist">
+      <li class="hot"><b>Bod 3:</b> jak ho dokončit? Prodej firmy a reinvestice do nemovitostí, nebo i něco dalšího (holding, společný projekt)?</li>
+      <li>Jak má cílovka 3 a 4 konvertovat: formulář na webu, osobní schůzka, nebo společné investice? „Spolupráce“ zatím nemá popsaný produkt.</li>
+      <li>Můžeme veřejně říct, že skládáš portfolia pro sportovce? Máš sportovce jako hosta?</li>
+      <li>Máš podnikatele po prodeji firmy, který by šel do NA PLACE?</li>
+      <li>Souhlasíš s poměrem 40/30/20/10 a se 4 výměnami dílů?</li>
+    </ul>
+    <p class="note-s">Ověřit před použitím: objem úspor na účtech (ČNB), ceny investujbezstarosti.cz (stav 05/2026), J&amp;T Business Report 2026.</p>
+  </div>
+</div>
+
 <section id="poznamky">
   <div class="sechead"><h2>Poznámky týmu</h2></div>
   <div class="tabs" role="tablist" aria-label="Poznámky">
@@ -176,24 +400,7 @@ footer{margin-top:48px;font-size:13px;color:var(--muted)}
   </div>
 </section>
 
-<section>
-  <div class="sechead"><h2>Pravidla pro všechny série</h2></div>
-  <div class="rules">
-    <div class="rule"><h3>Tón</h3><p>Klidně, suchý humor, čísla na obrazovce. Žádný hype a žádné sliby rychlého zbohatnutí.</p></div>
-    <div class="rule"><h3>Čísla</h3><p>Výnos Praha 2–3 %, sever 5–6 %, nikdy nad 6 %. Žádná nemovitost pod 1.500.000,- Kč. Sazby, ceny a pravidla ČNB ověřit v týdnu natáčení.</p></div>
-    <div class="rule"><h3>Férovost</h3><p>U proti-intuitivních rad vždy caveat a „není to finanční poradenství“. Mistr Pasivák je fiktivní postava.</p></div>
-    <div class="rule"><h3>Příběhy domů</h3><p>Jen veřejně doložená fakta se zdroji. Soukromé majitele nejmenovat, točit z veřejného prostranství, kauzy s žijícími lidmi přes advokáta.</p></div>
-    <div class="rule"><h3>CTA</h3><p>Na konci každého dílu: „Sleduj mě a ukážu ti vše kolem nemovitostí“.</p></div>
-  </div>
-  <p style="margin:16px 0 0;font-size:13px;color:var(--muted)">Interní dokumenty (otevře je jen Martin a tým):</p>
-  <div class="links">
-    <a href="https://claude.ai/artifact/KkDbKJLhctc1E2EggAY4Bg" target="_blank" rel="noopener">Strategie 3 nohou (dokument)</a>
-    <a href="https://claude.ai/artifact/NhUVaVsLw86vWYJ6cCPa19" target="_blank" rel="noopener">Pilot Akademie: scénář</a>
-    <a href="https://claude.ai/artifact/CjbKqdCzUrKGNSbGRknczs" target="_blank" rel="noopener">Roční plán (dokument)</a>
-  </div>
-</section>
-
-<footer>Pracovní plán. Témata a data se můžou měnit; data vydání podle kalendáře 2027.</footer>
+<footer>Pracovní plán. Témata, data a PR strategie se můžou měnit.</footer>
 </div>
 
 <script>
@@ -350,11 +557,11 @@ async function loadNotes(){
 }
 function setPerson(p){
   person=p;
-  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.p===p)));
+  document.querySelectorAll("#poznamky .tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.p===p)));
   document.getElementById("note-label").textContent="Nová poznámka ("+PEOPLE[p]+")";
   status("");loadPin();loadNotes();
 }
-document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>setPerson(b.dataset.p)));
+document.querySelectorAll("#poznamky .tabs button").forEach(b=>b.addEventListener("click",()=>setPerson(b.dataset.p)));
 nForm.addEventListener("submit",async ev=>{
   ev.preventDefault();
   if(!nText.value.trim()){status("Napiš text poznámky.",true);return}
@@ -365,6 +572,18 @@ nForm.addEventListener("submit",async ev=>{
   finally{nSave.disabled=false}
 });
 setPerson("irca");
+
+function showView(v){
+  document.getElementById("view-youtube").hidden=v!=="youtube";
+  document.getElementById("view-pr").hidden=v!=="pr";
+  document.querySelectorAll(".sitenav a").forEach(a=>{if(a.dataset.v===v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+}
+function fromHash(){showView(location.hash==="#pr"?"pr":"youtube")}
+window.addEventListener("hashchange",fromHash);fromHash();
+document.querySelectorAll(".ctabs button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".ctabs button").forEach(x=>x.setAttribute("aria-selected",String(x===b)));
+  document.querySelectorAll(".cpanel").forEach(p=>p.hidden=p.dataset.cp!==b.dataset.c);
+}));
 </script>
 </body>
 </html>
